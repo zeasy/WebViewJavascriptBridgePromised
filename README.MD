@@ -6,7 +6,7 @@ WebViewJavascriptBridge项目中, Web项目需要导入JS 的 Promise 实现
 
 #### Install
 ```
-npm i webviewjavascriptbridgepromised
+npm i webview-javascript-bridge-promised
 ```
 
 #### Usage
@@ -15,7 +15,7 @@ npm i webviewjavascriptbridgepromised
 https://github.com/marcuswestin/WebViewJavascriptBridge#usage
 
 ```
-var bridge = require('webviewjavascriptbridgepromised');
+var bridge = require('webview-javascript-bridge-promised');
 
 bridge.callHandler(...)
 bridge.registerHandler(...)
