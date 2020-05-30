@@ -22,11 +22,9 @@ setupWebViewJavascriptBridge(function(bridge) {
 const promised = function() {
     return new Promise(function(resolve) {
         if(window[bridgeName]) {
-            console.log('------1')
             resolve(window[bridgeName])
         } else {
             var listener = function() {
-                console.log('------2')
                 window.removeEventListener(setupEvent, listener)
                 resolve(window[bridgeName])
             };
