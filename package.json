@@ -1,6 +1,6 @@
 {
-  "name": "webviewjavascriptbridgepromised",
-  "version": "1.0.0",
+  "name": "webview-javascript-bridge-promised",
+  "version": "1.0.1",
   "description": "A Promise Version Inject JS of WebViewJavascriptBridge Project ",
   "main": "index.js",
   "scripts": {
