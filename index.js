@@ -1,7 +1,7 @@
 
 var bridgeName = window.WebViewJavascriptBridgeName || "WebViewJavascriptBridge";
 var callbacksName = window.WebViewJavascriptCallbacksName || "WVJBCallbacks";
-var protocolScheme = window.WebViewJavascriptProtocolScheme || "https";
+var protocolScheme = window.WebViewJavascriptProtocolScheme || "wvjbscheme";
 var setupEvent = protocolScheme + '://__bridge_setup__';
 
 function setupWebViewJavascriptBridge(callback) {
