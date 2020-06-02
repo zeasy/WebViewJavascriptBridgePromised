@@ -2,7 +2,7 @@
 var bridgeName = window.WebViewJavascriptBridgeName || "WebViewJavascriptBridge";
 var callbacksName = window.WebViewJavascriptCallbacksName || "WVJBCallbacks";
 var protocolScheme = window.WebViewJavascriptProtocolScheme || "wvjbscheme";
-var setupEvent = protocolScheme + '://__bridge_setup__';
+var setupEventUrl = protocolScheme + '://__bridge_setup__';
 var bridgeLoadedUrl = protocolScheme + '://__bridge_loaded__';
 
 function setupWebViewJavascriptBridge(callback) {
@@ -24,7 +24,10 @@ function setupWebViewJavascriptBridge(callback) {
 }
 
 setupWebViewJavascriptBridge(function(bridge) {
-    window.dispatchEvent(new Event(setupEvent))
+    if(window.ReactNativeWebView) {
+        window.ReactNativeWebView.postMessage(JSON.stringify({url:setupEventUrl}))
+    }
+    window.dispatchEvent(new Event(setupEventUrl))
 })
 
 const promised = function() {
@@ -33,10 +36,10 @@ const promised = function() {
             resolve(window[bridgeName])
         } else {
             var listener = function() {
-                window.removeEventListener(setupEvent, listener)
+                window.removeEventListener(setupEventUrl, listener)
                 resolve(window[bridgeName])
             };
-            window.addEventListener(setupEvent,listener)
+            window.addEventListener(setupEventUrl,listener)
         }
     })
 }
