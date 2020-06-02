@@ -3,16 +3,24 @@ var bridgeName = window.WebViewJavascriptBridgeName || "WebViewJavascriptBridge"
 var callbacksName = window.WebViewJavascriptCallbacksName || "WVJBCallbacks";
 var protocolScheme = window.WebViewJavascriptProtocolScheme || "wvjbscheme";
 var setupEvent = protocolScheme + '://__bridge_setup__';
+var bridgeLoadedUrl = protocolScheme + '://__bridge_loaded__';
 
 function setupWebViewJavascriptBridge(callback) {
+    
 	if (window[bridgeName]) { return callback(window[bridgeName]); }
 	if (window[callbacksName]) { return window[callbacksName].push(callback); }
-	window[callbacksName] = [callback];
-	var WVJBIframe = document.createElement('iframe');
-	WVJBIframe.style.display = 'none';
-	WVJBIframe.src = protocolScheme + '://__bridge_loaded__';
-	document.documentElement.appendChild(WVJBIframe);
-	setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+    window[callbacksName] = [callback];
+
+    if(window.ReactNativeWebView) {//Compatible react-native-WebViewJavascriptBridge
+        window.ReactNativeWebView.postMessage(JSON.stringify({url:bridgeLoadedUrl}))
+    } else {
+        var WVJBIframe = document.createElement('iframe');
+        WVJBIframe.style.display = 'none';
+        WVJBIframe.src = bridgeLoadedUrl;
+        document.documentElement.appendChild(WVJBIframe);
+        setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+    }
+	
 }
 
 setupWebViewJavascriptBridge(function(bridge) {
