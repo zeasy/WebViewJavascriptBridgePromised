@@ -24,9 +24,6 @@ function setupWebViewJavascriptBridge(callback) {
 }
 
 setupWebViewJavascriptBridge(function(bridge) {
-    if(window.ReactNativeWebView) {
-        window.ReactNativeWebView.postMessage(JSON.stringify({url:setupEventUrl}))
-    }
     window.dispatchEvent(new Event(setupEventUrl))
 })
 
